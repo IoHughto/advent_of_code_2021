@@ -7,7 +7,6 @@ import (
 )
 
 func Run() error {
-	fmt.Println("Day 1")
 	rawData, err := shared.ReadData()
 	if err != nil {
 		return err
@@ -18,14 +17,16 @@ func Run() error {
 		return err
 	}
 
+	fmt.Println("Part A")
 	err = partA(data)
 	if err != nil {
 		return err
 	}
 
+	fmt.Println("Part B")
 	err = partB(data)
 
-	return nil
+	return err
 }
 
 func convertToInt(data []string) ([]int, error) {

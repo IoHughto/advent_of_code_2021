@@ -2,6 +2,7 @@ package cmd
 
 import (
 	day01 "advent_of_code_2021/days/01"
+	day02 "advent_of_code_2021/days/02"
 	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -31,9 +32,12 @@ func init() {
 func Run(_ *cobra.Command, _ []string) error {
 	var err error
 
+	fmt.Printf("Day %02d\n", viper.GetInt("day"))
 	switch viper.GetInt("day") {
 	case 1:
 		err = day01.Run()
+	case 2:
+		err = day02.Run()
 	default:
 		err = fmt.Errorf("%w: %d", errUnexpectedDay, viper.GetInt("day"))
 	}
