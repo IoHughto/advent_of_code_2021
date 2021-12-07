@@ -1,7 +1,6 @@
 package day06
 
 import (
-	"advent_of_code_2021/shared"
 	"fmt"
 	"strconv"
 	"strings"
@@ -9,12 +8,7 @@ import (
 
 type fishByAge [9]int
 
-func Run() error {
-	rawData, err := shared.ReadData()
-	if err != nil {
-		return err
-	}
-
+func Run(rawData []string) error {
 	fishByAge, err := convertToFish(rawData)
 	if err != nil {
 		return err

@@ -1,7 +1,6 @@
 package day04
 
 import (
-	"advent_of_code_2021/shared"
 	"fmt"
 	"github.com/fatih/color"
 	"strconv"
@@ -21,12 +20,7 @@ type board struct {
 
 var someoneHasWon = false
 
-func Run() error {
-	rawData, err := shared.ReadData()
-	if err != nil {
-		return err
-	}
-
+func Run(rawData []string) error {
 	instructions, boards, err := convertToInstructionsAndBoards(rawData)
 	if err != nil {
 		return err

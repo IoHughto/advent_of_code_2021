@@ -1,17 +1,11 @@
 package day01
 
 import (
-	"advent_of_code_2021/shared"
 	"fmt"
 	"strconv"
 )
 
-func Run() error {
-	rawData, err := shared.ReadData()
-	if err != nil {
-		return err
-	}
-
+func Run(rawData []string) error {
 	data, err := convertToInt(rawData)
 	if err != nil {
 		return err

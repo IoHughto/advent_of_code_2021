@@ -1,7 +1,6 @@
 package day05
 
 import (
-	"advent_of_code_2021/shared"
 	"fmt"
 )
 
@@ -17,12 +16,7 @@ type segment struct {
 
 type pipeMap [][]int
 
-func Run() error {
-	rawData, err := shared.ReadData()
-	if err != nil {
-		return err
-	}
-
+func Run(rawData []string) error {
 	segments, err := convertToSegments(rawData)
 	if err != nil {
 		return err

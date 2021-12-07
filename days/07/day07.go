@@ -1,20 +1,18 @@
 package day07
 
 import (
-	"advent_of_code_2021/shared"
 	"fmt"
 	"math"
 	"strconv"
 	"strings"
 )
 
-func Run() error {
-	rawData, err := shared.ReadData()
-	if err != nil {
-		return err
+func Run(rawData []string) error {
+	if len(rawData) != 1 {
+		return fmt.Errorf("%w: %d", errUnexpectedData, len(rawData))
 	}
 
-	data, err := convertToInts(rawData)
+	data, err := convertToInts(rawData[0])
 	if err != nil {
 		return err
 	}
@@ -32,18 +30,16 @@ func Run() error {
 	return nil
 }
 
-func convertToInts(data []string) ([]int, error) {
+func convertToInts(data string) ([]int, error) {
 	var intData []int
 
-	for _, line := range data {
-		numberStrings := strings.Split(line, ",")
-		for _, numberString := range numberStrings {
-			value, err := strconv.Atoi(numberString)
-			if err != nil {
-				return nil, err
-			}
-			intData = append(intData, value)
+	numberStrings := strings.Split(data, ",")
+	for _, numberString := range numberStrings {
+		value, err := strconv.Atoi(numberString)
+		if err != nil {
+			return nil, fmt.Errorf("%w: %s", errCantParseInt, numberStrings)
 		}
+		intData = append(intData, value)
 	}
 
 	return intData, nil
@@ -80,7 +76,7 @@ func partB(data []int) error {
 		}
 	}
 
-	fmt.Printf("Part A:\n%d fuel at position %d\n", minFuel, minFuelPosition)
+	fmt.Printf("Part B:\n%d fuel at position %d\n", minFuel, minFuelPosition)
 
 	return nil
 }
@@ -114,3 +110,7 @@ func computeFuelCosts(data []int, position int, fuelFunction func(int) int) int 
 func cumulative(value int) int {
 	return value * (1 + value) / 2
 }
+
+// Sentinel errors
+var errUnexpectedData = fmt.Errorf("unexpected number of lines in input data")
+var errCantParseInt = fmt.Errorf("can't parse as int")

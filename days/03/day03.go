@@ -1,18 +1,12 @@
 package day03
 
 import (
-	"advent_of_code_2021/shared"
 	"fmt"
 	"strconv"
 	"strings"
 )
 
-func Run() error {
-	rawData, err := shared.ReadData()
-	if err != nil {
-		return err
-	}
-
+func Run(rawData []string) error {
 	data, err := convertToIntSlice(rawData)
 	if err != nil {
 		return err
