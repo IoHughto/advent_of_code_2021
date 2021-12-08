@@ -8,6 +8,7 @@ import (
 	day05 "advent_of_code_2021/days/05"
 	day06 "advent_of_code_2021/days/06"
 	day07 "advent_of_code_2021/days/07"
+	day08 "advent_of_code_2021/days/08"
 	"advent_of_code_2021/shared"
 	"fmt"
 	"github.com/spf13/cobra"
@@ -60,6 +61,8 @@ func Run(_ *cobra.Command, _ []string) error {
 		err = day06.Run(rawData)
 	case 7:
 		err = day07.Run(rawData)
+	case 8:
+		err = day08.Run(rawData)
 	default:
 		err = fmt.Errorf("%w: %d", errUnexpectedDay, viper.GetInt("day"))
 	}
