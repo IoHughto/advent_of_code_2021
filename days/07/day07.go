@@ -17,15 +17,8 @@ func Run(rawData []string) error {
 		return err
 	}
 
-	err = partA(data)
-	if err != nil {
-		return err
-	}
-
-	err = partB(data)
-	if err != nil {
-		return err
-	}
+	fmt.Printf("Part A: %d\n", findMinFuel(data, simple))
+	fmt.Printf("Part B: %d\n", findMinFuel(data, cumulative))
 
 	return nil
 }
@@ -45,40 +38,18 @@ func convertToInts(data string) ([]int, error) {
 	return intData, nil
 }
 
-func partA(data []int) error {
+func findMinFuel(data []int, fuelFunction func(int) int) int {
 	maxPosition := findMaxPosition(data)
 
 	minFuel := math.MaxInt
-	minFuelPosition := -1
 	for i := 0; i <= maxPosition; i++ {
-		fuel := computeFuelCosts(data, i, func(a int) int { return a })
+		fuel := computeFuelCosts(data, i, fuelFunction)
 		if fuel < minFuel {
 			minFuel = fuel
-			minFuelPosition = i
 		}
 	}
 
-	fmt.Printf("Part A:\n%d fuel at position %d\n", minFuel, minFuelPosition)
-
-	return nil
-}
-
-func partB(data []int) error {
-	maxPosition := findMaxPosition(data)
-
-	minFuel := math.MaxInt
-	minFuelPosition := -1
-	for i := 0; i <= maxPosition; i++ {
-		fuel := computeFuelCosts(data, i, cumulative)
-		if fuel < minFuel {
-			minFuel = fuel
-			minFuelPosition = i
-		}
-	}
-
-	fmt.Printf("Part B:\n%d fuel at position %d\n", minFuel, minFuelPosition)
-
-	return nil
+	return minFuel
 }
 
 func findMaxPosition(data []int) int {
@@ -109,6 +80,10 @@ func computeFuelCosts(data []int, position int, fuelFunction func(int) int) int 
 
 func cumulative(value int) int {
 	return value * (1 + value) / 2
+}
+
+func simple(value int) int {
+	return value
 }
 
 // Sentinel errors
